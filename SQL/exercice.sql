@@ -100,6 +100,5 @@ SELECT*FROM voitures WHERE id_car BETWEEN 2 AND 5;
 
 SELECT*FROM voitures WHERE marque LIKE 'l%';
 
-Ba11 h 03
-a rejoint #sql.
+
 
