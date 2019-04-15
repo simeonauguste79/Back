@@ -1,6 +1,11 @@
 <?php 
 require_once("include/init.php");
-extract($_POST); // $_POST['pseudo'] --> $pseudo 
+extract($_POST); // $_POST['pseudo'] --> $pseudo
+
+if(internauteEstConnecte()) // Si l'internaute est connecté, il n'a rien à faire sur la page inscription, on le redirige vers sa page profil
+{
+    header("Location: profil.php");
+}
 
 // Exo 2 : 
 //echo '<pre>'; print_r($_POST); echo '</pre>';
@@ -30,6 +35,8 @@ if($_POST) // si on valide le formaulaire, on entre dans le IF
     // Exo : si l'internaute a bien rempli le formulaire, cela veut dire qu'il n'est passé dans aucune des conditions IF donc la varaible $error est vide, nous pouvons donc executer le traitement de l'insertion (requete préparée)
     if(!$error)
     {
+        //$_POST['mdp'] = password_hash($_POST['mdp'], PASSWORD_DEFAULT); // on ne conserve jamais en cliar les mots de passe dans la BDD, password_hash permet  de créer une clé de hachage
+
         $data_insert = $bdd->prepare("INSERT INTO membre
         (pseudo, mdp, nom, prenom, email, civilite, ville, code_postal, adresse) VALUES (:pseudo, :mdp, :nom, :prenom, :email, :civilite, :ville, :code_postal, :adresse)");
 
