@@ -53,15 +53,19 @@ if($_POST)
     {
         $data_insert = $bdd->prepare("INSERT INTO produit
         (reference,categorie,titre,description,couleur,taille,public,photo,prix,stock) VALUES (:reference,:categorie,:titre,:description,:couleur,:taille,:public,:photo,:prix,:stock)");
+
+        $_GET['action'] = 'affichage';
+
+        $validate .= "<div class='alert alert-success col-md-6 offset-md-3 text-center'>Le produit référence <strong>$reference</strong> a bien été ajouté !!</div>"; 
     }
     else
     {
         // Exo : requete update
-
-        $data_insert = $bdd->prepare("UPDATE produit SET reference = :reference, categorie = categorie, titre  titre, description = :description, couleur = :couleur, taille = taille, public = :public, photo = :photo, prix = :prix, stock WHERE id_produit = $id_produit");
+        $data_insert = $bdd->prepare("UPDATE produit SET reference = :reference,categorie = :categorie,titre = :titre,description= :description,couleur = :couleur,taille = :taille,public = :public,photo = :photo,prix = :prix,stock = :stock WHERE id_produit = $id_produit");
+        
         $_GET['action'] = 'affichage';
 
-        $validate .= "<div class='alert-success col-md-6 offset-md-3 text-center'> Le ^produit n° <strong>$id_produit</strong> a bien été modifié !!</div>";
+        $validate .= "<div class='alert alert-success col-md-6 offset-md-3 text-center'>Le produit n° <strong>$id_produit</strong> a bien été modifié !!</div>"; 
     }
     
     foreach($_POST as $key => $value)

@@ -72,7 +72,7 @@ echo '<hr><h2 class="display-4 text-center">Récuperations saisies du Formulaire
 
 
     <div>
-      <button type="submit" class="btn btn-dark">Ienvoyer</button>
+      <button type="submit" class="btn btn-dark">envoyer</button>
     </div>
     
 </form>
