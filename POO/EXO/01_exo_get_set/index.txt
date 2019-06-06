@@ -1,0 +1,39 @@
+Exercice 1 : PHPOO
+
+    - Créer une classe Etudiant
+
+    - Créer les propriétés   private
+
+        - prenom (string de 5 à 30 caractères)
+
+        - nom (string de 5 à 30)
+
+        - email(email)
+
+        - téléphone (INT de 10 caractères)
+
+        
+
+        - Créer une fonction getInfos() qui retourne un array avec toutes les infos
+
+        - Instancier 3 fois la classe dans un autre fichier. Pour chaque étudiant affecter des valeurs et les afficher. 
+
+xercice 3 : AJAX
+
+    Faire un formulaire HTML pour ajouter un nouvel employe en AJAX (jquery) à la base entreprise_pole_s. 
+
+	    prenom, nom, sexe, service, salaire
+
+	Cet exercice se compose de 
+
+		ajax.js, connexion.php, ajax.php, index.php (jquery)
+
+	
+
+        
+
+Exercice 4 : SQL (BDD haribo)
+
+    Dans un fichier ecrire une requete (jointure) permettant d'afficher tous les prénoms des personnes ayant mangé des Tagada pik
+        
+

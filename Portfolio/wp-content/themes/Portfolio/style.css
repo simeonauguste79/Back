@@ -1,0 +1,99 @@
+/*   
+Theme Name: Portfolio
+Theme URI: http://localhost/Back/portfolio/wp-content/themes/Portfolio
+Description: Portfolio developpeur WEB
+Author: Ba
+Author URI: http://localhost/Back/portfolio
+Version: 1.0
+*/
+
+body{
+    background: #EBEAE8;
+}
+
+.container-fluid .d-flex{
+    background: black !important;
+}
+
+
+.container-fluid .d-flex h1{
+    text-decoration: white !important;
+}
+
+a{
+    text-decoration: none !important;
+}
+
+.hauteur{
+    min-height: 150px;
+}
+
+.h-entetes{
+    min-height: 200px;
+}
+
+.ma-section{
+    min-height: 600px;
+}
+
+.widget{
+    list-style-type: none !important;
+}
+
+
+.navbar-brand li a{
+    display: none !important;
+}
+ 
+.mes-competences3 .fab{
+
+    font-size: 5rem;
+
+}
+
+.menu-header ul{
+    width: 500px;
+}
+
+.menu-header ul li{
+    display: inline;
+    padding-right: 5%;
+}
+
+.menu-header ul li a{
+    color: black;
+}
+
+.ml1 {
+  font-weight: 900;
+  font-size: 3.5em;
+}
+
+.ml1 .letter {
+  display: inline-block;
+  line-height: 1em;
+}
+
+.ml1 .text-wrapper {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.1em;
+  padding-right: 0.05em;
+  padding-bottom: 0.15em;
+}
+
+.ml1 .line {
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background-color: #fff;
+  transform-origin: 0 0;
+}
+
+.ml1 .line1 { top: 0; }
+.ml1 .line2 { bottom: 0; }
+.menu{
+padding-right: 5%;
+}
