@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <!-- Lien de notre fichier style CSS -->
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 
     <title>{% block title %}Boutique {% endblock %}</title>
   </head>
@@ -25,32 +25,39 @@
     <div class="collapse navbar-collapse" id="navbarsExample04">
         <ul class="navbar-nav mr-auto">
 
-        <li class="nav-item">
-            <a class="nav-link" href="{{ path('homepage') }}">Boutique</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ path('profil') }}">Profil</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="">Panier</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="">Deconnexion</a>
-        </li>
 
-        <li class="nav-item">
-            <a class="nav-link" href="{{ path('homepage') }}">Boutique</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ path('inscription') }}">Inscription</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ path('connexion') }}">Connexion</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="">Panier</a>
-        </li>
-        	<li class="dropdown">	
+
+		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+		{# si le visiteur est connecté (peu importe le niveau de role) #}
+			<li class="nav-item">
+				<a class="nav-link" href="{{ path('homepage') }}">Boutique</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{{ path('profil') }}">Profil</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="">Panier</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{{ path('deconnexion') }}">Deconnexion</a>
+			</li>
+		{% else %}
+			<li class="nav-item">
+				<a class="nav-link" href="{{ path('homepage') }}">Boutique</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{{ path('inscription') }}">Inscription</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{{ path('connexion') }}">Connexion</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="">Panier</a>
+			</li>
+		{% endif %}
+		
+		{% if is_granted('ROLE_ADMIN') %}
+        <li class="dropdown">	
 			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				Admin
 			</button>
@@ -60,7 +67,10 @@
 				<li><a class="dropdown-item" href="{{ path('admin_commande') }}"><i class="fas fa-shopping-cart"></i>&nbsp;Gestion Commande</a></li>
 			</ul>
 		</li> 
-       
+       {% endif %}
+	   
+	   
+	   
 
         </ul>
         <form class="form-inline my-2 my-md-0">
@@ -73,6 +83,20 @@
 		<div class="row form1">
 		
 			
+			{% for message in app.session.flashbag.get('success')%}
+				<div class="alert alert-success">
+					{{ message }}
+				</div>
+			{% endfor %}
+			
+			{% for message in app.session.flashbag.get('errors')%}
+				<div class="alert alert-danger">
+					{{ message }}
+				</div>
+			{% endfor %}
+			
+			
+			
 			{% block content %}
 			{% endblock %}
 
@@ -81,7 +105,7 @@
 		<!-- /.row -->
 	</section>
 
-    <footer class="bg-dark text-white text-center p-3 fixed-bottom">
+    <footer class="bg-dark text-white text-center p-3">
         &copy; 2019 - GL - Pas touche c'est mon site à moi !!! 
     </footer>
 

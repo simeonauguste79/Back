@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * DetailsCommande
  *
  * @ORM\Table(name="details_commande")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\DetailCommandeRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\DetailsCommandeRepository")
  */
 class DetailsCommande
 {

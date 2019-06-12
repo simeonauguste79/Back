@@ -24,7 +24,7 @@ class Membre
     /**
      * @var integer
      *
-     * @ORM\Column(name="codepostal", type="integer", nullable=false)
+     * @ORM\Column(name="codePostal", type="integer", nullable=false)
      */
     private $codepostal;
 
@@ -82,7 +82,7 @@ class Membre
      *
      * @ORM\Column(name="statut", type="integer", nullable=false)
      */
-    private $statut;
+    private $statut = 0;
 
     /**
      * @var string

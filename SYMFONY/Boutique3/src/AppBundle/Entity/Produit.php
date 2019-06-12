@@ -3,12 +3,13 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Produit
  *
  * @ORM\Table(name="produit")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\Membreproduit")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ProduitRepository")
  */
 class Produit
 {
@@ -75,7 +76,15 @@ class Produit
      *
      * @ORM\Column(name="photo", type="string", length=255, nullable=false)
      */
-    private $photo;
+    private $photo = 'default.jpg';
+	
+	
+	// On ne mappe pas cette propriété car elle n'est pas liée à la base de donnée, elle va simplement nous permettre de manipuler la (les) photos d'un produits avant de l'enregistrer. 
+	private $file; 
+	
+	
+	
+	
 
     /**
      * @var float
@@ -342,4 +351,76 @@ class Produit
     {
         return $this->stock;
     }
+	
+	
+	
+	/**
+     * Set file
+     *
+     * @param object UploadedFile
+     *
+     * @return Produit
+	 *
+	 * L'objet UploadedFile de Symfony, nous permet de gérer tout ce qui est lié à un fichier uploadé ($_FILES ==>  nom, taille, type, code erreur, emplacement temporaire )
+     */
+    public function setFile(UploadedFile $file = NULL)
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+
+    /**
+     * Get file
+     *
+     * @return object UploadedFile
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+	
+	
+	public function uploadPhoto(){
+		
+		// S'il n'y a pas de fichier chargé dans l'objet alors on sort de la fonction
+		if(!$this -> file){
+			return;
+		}
+		
+		// Récupère le nom original de la photo pour le renommer.
+		$name = $this -> renameFile($this -> file -> getClientOriginalName());
+		//$name = renamefile('avatar.jpg')
+		
+		// On enregistre en BDD le nouveau nom de la photo :
+		$this -> photo = $name; 
+		
+		// Enfin il faut déplacer la photo dans son dossier définitif. 
+		$this -> file -> move($this -> photoDir(), $name);
+		
+	}
+	
+	public function renameFile($nom){
+		// avatar.jpg
+		// file_1500000000_4568_avatar.jpg
+		return 'file_' . time() . '_' . rand(1, 9999) . $nom;
+	}
+	
+	public function photoDir(){
+		return __DIR__ . '/../../../web/photo';
+	}
+	
+	public function removePhoto(){
+		if(file_exists($this -> photoDir() . '/' . $this -> photo) && $this -> photo != 'default.jpg'){
+			unlink($this -> photoDir() . '/' . $this -> photo);
+		}
+		// Si le fichier exists alors on le supprime.
+	}
+	
+	
+	
+	
+	
+	
+	
 }
